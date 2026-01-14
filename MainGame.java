@@ -1,224 +1,144 @@
+package com.esisa.java;
 
-package noaman.games;
+public class Examples {
 
-import java.util.Scanner;
-
-public class MainGame {
-	
-	static class Move {
-		public int col; //col of the table
-		public int row; //row of the table
-		
-		@Override
-		public String toString() {
-			return "Row : " + row + ", Col :" + col;
+	public Examples() {
+			exp07();
 		}
-	}
-	
-	char mainPlayer = 'x';
-	char secondPlayer = 'o';
-	
-	boolean gameTerminated = false;
-	boolean mainPlayerTurn = true;
-	
-	Scanner scanner = new Scanner(System.in);
-	
-	public char board[][] = {
-		{'_','_','_'},
-		{'_','_','_'},
-		{'_','_','_'}
-	}; //board of the game
-	
-	Move lastMove = new Move();
-	
-	public MainGame() {
-		boolean Valid;
-		int response, winner;
-		System.out.println("Welcome to tic-tac-toc:");
-		do {
-			if(!areMovesLeft()) {
-				winner = 0;
-				this.gameTerminated = true;
-				break;
-			}
-			displayBoard();
-			do {
-				response = askForMove(this.mainPlayerTurn);
-				Valid = valueChecker(response);
-			}while(!Valid);
+		
+		void exp01() {
+			/*
+			 * byte : 1 octet
+			 * short : 2 octets
+			 * int  : 4 octets
+			 * long : 8 octets
+			 * float : 4 octets
+			 * double : 8 octets
+			 * char : 2 octets : unicode
+			 * boolean : true , false
+			 */
+			//float pi = 3.14; faux
+			float pi = 3.14f;
+			double x = 3.14;
+			float y=(float)x; // casting = transtypage
 			
-			Move bestMove = findBestMove();
-			bestMove.col++;
-			bestMove.row++;
-			System.out.println("The best move was :" + bestMove);
 			
-			applyAnswer(mainPlayerTurn);
-			this.mainPlayerTurn = !this.mainPlayerTurn;
-			winner = winCondition();
+			char c1= '\u0636';
+			System.out.println("c1 =" + c1);
+			char c2 = '\u20AC';
+			System.out.println("c2 =" + c2);
+			char c3 = 65;
+			System.out.println("c3 =" + c3);
 			
-		}while(!this.gameTerminated);
-		displayBoard();
-
-		switch(winner) {
-			case 10:
-				System.out.println("Congratulations sir First you won");
-				break;
-			case -10:
-				System.out.println("Congratulations sir Second you won");
-				break;
-			default:
-				System.out.println("The game ended in a draw");
-				break;
-		}
-	}
-
-	public void displayBoard() {
-		for (int i = 0; i < this.board.length; i++) {
-			for (int j = 0; j < this.board.length; j++) {
-				System.out.print(" | " + this.board[i][j]);
-			}
-			System.out.print(" |");
-			System.out.println("");
-		}
-	}
-	
-	public int askForMove(boolean mainPlayerTurn) {
-		String Player = (mainPlayerTurn) ? "sir First" : "sir Second" ;
-		
-		System.out.println("it's the turn of " + Player + ".\nPlease choose a square");
-		return scanner.nextInt();
-	}
-	
-	public boolean valueChecker(int value) {
-		int firstNumber = value / 10;
-		int secondNumber = value - (firstNumber * 10);
-		
-		if ( firstNumber == 0 || secondNumber == 0) return false; 
-		
-		if(firstNumber < 4 && secondNumber < 4 && this.board[firstNumber-1][secondNumber-1] == '_') {
-			this.lastMove.row = firstNumber;
-			this.lastMove.col = secondNumber; 
-			return true;
-		}
-		System.out.println("The chosen cell is either out bounds or already full.");
-		return false;
-	}
-	
-	public void applyAnswer(boolean turn) {
-		this.board[this.lastMove.row-1][this.lastMove.col-1] = (turn) ? 'x' : 'o' ;
-	}
-	
-	public int winCondition() {
-		for (int i = 0; i < 3; i++) {
-			if(  this.board[i][0] == this.board[i][2] && this.board[i][1] == this.board[i][2] && this.board[i][1] != '_' )
-			{
-				this.gameTerminated = true;
-				return (this.board[i][1] == 'x') ? 10 : -10 ;
-			}
-		}
-		
-		if(this.board[0][0] == this.board[1][1] && this.board[1][1] == this.board[2][2] && this.board[1][1] != '_' ) {
-			this.gameTerminated = true;
-			return (this.board[1][1] == 'x') ? 10 : -10 ;
-		}
-		else if(this.board[2][0] == this.board[1][1] && this.board[1][1] == this.board[0][2] && this.board[1][1] != '_') {
-			this.gameTerminated = true;
-			return (this.board[1][1] == 'x') ? 10 : -10 ;
-		}
-		
-		for (int i = 0; i < 3; i++) {
-			if(this.board[0][i] == this.board[1][i] && this.board[1][i] == this.board[2][i] && this.board[1][i] != '_') {
-				this.gameTerminated = true;
-				return (this.board[i][1] == 'x') ? 10 : -10 ;
-			}
-		}
-		
-		return 0; 
-	}
-	
-	public boolean areMovesLeft() {
-		for (int i = 0; i <this.board.length; i++) {
-			for (int j = 0; j <this.board.length; j++) {
-				if(board[i][j] == '_') return true;
-			}
-		}
-		return false;
-	}
-	
-	public int minimax(int depth, boolean isMax) {
-		int score = winCondition();
-		
-		if(score == 10) return 10;
-		else if (score == -10) return -10;
-		
-		if(areMovesLeft() == false) return 0;
-		
-		if(isMax) {
-			int best = -1000;
+			int a = 66;
+			char c4 = (char)a;
+			System.out.println("c4 =" + c4);
+			int b = c3;
+			System.out.println("b =" + b);
 			
-			for (int i = 0; i <this.board.length; i++) {
-				for (int j = 0; j <this.board.length; j++) {
-					if ( this.board[i][j] == '_') {
-						board[i][j] = 'x';
-						
-						best = Math.max(best, minimax(depth+1, !isMax));
-						
-						board[i][j] = '_';
-					}
-				}
+			//Generer une lettre majuscule aléatoire :
+			char r1 = (char)('A' + (int)(Math.random() * 26)); //Math.random donne toujours une valeur entre 0 et 1 
+			System.out.println("r1 =" + r1);
+			
+			boolean b1 = true;
+			if(b1) {
+				System.out.println("b1 = " + b1);
 			}
 			
-			return best;
+			boolean b2 = 20 < 30;
+			System.out.println("b2 = " + b2);
 		}
-		else {
-			int best = 1000;
+		
+		void exp02() {
+			int a = 20;
+			inc(a); // affectation de valeur
+			System.out.println("a = " + a);
+		}
+		
+		void exp03() {
+			Entier a = new Entier(20);
+			inc(a); // affectation d'adresse
+			System.out.println("a = " + a);
+		}
+		
+		void inc(Entier a) { //passage par référence ou par addresse 
+			a.setValue(a.getValue() + 1);
+		}
+		
+		void inc(int p) { //passage par valeur
+			p++;
+		}
+		
+		void exp04() {
+			Entier a = new Entier(20);
+			Entier b = a;
+			b.setValue(35);
+			System.out.println("a = " + a);
+			System.out.println("b = " + b);
+		}
+		
+		void exp05() {
+			Entier a = new Entier(20);
+			a.inc();
+			System.out.println("a = " + a);
+		}
+		//Type wrappers (classes wrappers)
+		void exp06() {
+			/*			Classes
+			 * byte 	: Byte
+			 * short	: Short
+			 * int 		: Integer
+			 * long		: Long
+			 * float 	: Float
+			 * double	: Double
+			 * char 	: Character
+			 * boolean	: Boolean
+			 */
+			//JDK 5 : AutoBoxing
+			Integer x2 = 20;
+			System.out.println("x2 = " + x2);
+			int a = 30;
+			Integer a1 = 30;
+			System.out.println("a1 = " + a1);
+			//Remarque : Le type Integer ainsi que toutes les autres
+			//			classes Wrappers sont Immuable (Immutable)
+			//==> Changement de valeur impossible (pas de setters)
+			//Exemple de classe immuable : Point
+			Point p1 = new Point(20, 30);
+			//pas de moyen pour modifier le contenu de p1
+			System.out.println("p1 = " + p1);
 			
-			for (int i = 0; i <this.board.length; i++) {
-				for (int j = 0; j <this.board.length; j++) {
-					if(board[i][j] == '_') {
-						board[i][j] = 'o';
-						
-						best = Math.min(best, minimax(depth+1, !isMax));
-						
-						board[i][j] = '_';
-					}
-				}
-			}
-			return best;
-		}
-	}
-	
-	Move findBestMove() {
-		boolean save = this.gameTerminated;
-		int bestVal = -1000;
-		Move bestMove = new Move();
-		bestMove.row = -1;
-		bestMove.col = -1;
-		
-		for (int i = 0; i <this.board.length; i++) {
-			for (int j = 0; j <this.board.length; j++) {
-				if(board[i][j] == '_') {
-					
-					board[i][j] = 'x';
-					
-					int moveVal = minimax(0 ,false);
-					
-					board[i][j] = '_';
-					
-					if(moveVal > bestVal) {
-						bestMove.row = i;
-						bestMove.col = j;
-						bestVal = moveVal;
-					}
-				}
-			}
+			//unboxing :
+			int b = x2;
+			int c = x2.intValue();
+			
+			System.out.println("b = " + b);
+			System.out.println("c = " + c);
+			
+			String s = "35";
+			int x3 = Integer.parseInt(s);
+			System.out.println("x3 = " + x3);
 		}
 		
-		this.gameTerminated = save;
-		return bestMove;
-	}
-	
+		void exp07() {
+			String s1 = "3.14";
+			double d1 = Double.parseDouble(s1);
+			System.out.println(" d1 = " + d1);
+			
+			String s2 = "3,14";
+			double d2 = 0;
+			try {
+				d2 = Double.parseDouble(s2);
+			} catch (Exception e) {
+				System.out.println("Erreur : " + e.getMessage());
+			}
+			
+			System.out.println("d2 = " + d2);
+		}
+		
 	public static void main(String[] args) {
-		new MainGame();
+		new Examples();
+
 	}
+
 }
